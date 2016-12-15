@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "exaprint",
+    "exaprint/rules/node",
+    "exaprint/rules/es6"
+  ]
+}
