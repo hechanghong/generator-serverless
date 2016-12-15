@@ -12,20 +12,11 @@ First of all, you are going to need [Yeoman](http://yeoman.io/):
 ```
 npm install -g yo
 ```
-Then get the project:
+Then get the generator:
 
 ```bash
-git clone https://github.com/exaprint/generator-serverless
-cd generator-serverless
-npm i
+npm i -g generator-serverless
 ```
-For now this generator is private, so you'll have to link your npm to this local project.
-In the root directory generator-serverless, type:
-```
-npm link
-```
-This will create a bundle from the project and make a symbolic link to use it as 
-a node module like any other.
 
 ## Usage
 
