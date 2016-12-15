@@ -134,6 +134,10 @@ const serverGenerator = generators.Base.extend({
         this.templatePath('bin/function-lib.sh'),
         this.destinationPath('bin/function-lib.sh')
       );
+      this.fs.copy(
+        this.templatePath('bin/remove.sh'),
+        this.destinationPath('bin/remove.sh')
+      );
     },
     config() {
       this.fs.copy(
