@@ -1,0 +1,40 @@
+{
+  "name": "<%= projectName %>",
+  "version": "<%= projectVersion %>",
+  "description": "<%= projectDescription %>",
+  "private": true,
+  "scripts": {
+    "ci": "bash bin/ci.sh",
+    "test": "mocha --timeout 30000 --colors --recursive test/",
+    "deploy-dev": "bash bin/deploy.sh dev",
+    "deploy-prod": "bash bin/deploy.sh production",
+    "security": "nsp check",
+    "lint": "eslint src test"
+  },
+  "keywords": [
+    "api",
+    "lambda",
+    "node",
+    "js"
+  ],
+  "author": "<%= authorName %> <<%= authorEmail %>>",
+  "license": "MIT",
+  "dependencies": {
+    "debug": "2.3.3",
+    "dotenv": "2.0.0",
+    "http-status": "^0.2.3",
+    "joi": "10.0.5",
+    "winston": "2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "3.12.0",
+    "eslint-config-exaprint": "latest",
+    "ink-docstrap": "1.3.0",
+    "jenkins-mocha": "3.0.4",
+    "jsdoc": "3.4.3",
+    "nsp": "2.6.2",
+    "plato": "1.7.0",
+    "serverless-mocha-plugin": "1.3.1",
+    "serverless-offline": "3.5.7"
+  }
+}
