@@ -1,3 +1,6 @@
+'use strict';
+
+/* eslint-disable */
 const path       = require('path');
 const yosay      = require('yosay');
 const to         = require('to-case');
@@ -182,6 +185,6 @@ const serverGenerator = generators.Base.extend({
     this.log(yosay('Your project has been set up! \n Thanks and see you soon!'));
   }
 });
-
+/* eslint-enable */
 
 module.exports = serverGenerator;

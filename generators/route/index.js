@@ -1,16 +1,21 @@
+'use strict';
+
 const to = require('to-case');
 const generators = require('yeoman-generator');
 const fileReader = require('html-wiring');
 
 /**
  * Generates the different types of names for our routes
+ * @param {String} routeName Route Name
+ * @return {Array} Route Names
  */
-const genRoutesNames = (model) => {
+const genRoutesNames = (routeName) => {
   const routeNames = {
-    slugName: to.slug(model),
-    pascalName: to.pascal(model),
-    camelName: to.camel(model)
+    slugName: to.slug(routeName),
+    pascalName: to.pascal(routeName),
+    camelName: to.camel(routeName),
   };
+
   return routeNames;
 };
 
