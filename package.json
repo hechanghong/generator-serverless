@@ -4,13 +4,13 @@
   "description": "Yeoman generator for creating serverless projects",
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm test",
     "test": "mocha --bail test/*.spec.js",
     "eslint": "eslint . --ext .js"
   },
   "author": "tomexa <thomas@exagroup.biz>",
   "contributors": [],
-  "license": "",
+  "repository": "https://github.com/exaprint/generator-serverless",
+  "license": "MIT",
   "keywords": [
     "yeoman-generator",
     "generator-serverless",
