@@ -1,11 +1,13 @@
 'use strict';
 
-/* eslint-disable */
 const path       = require('path');
 const yosay      = require('yosay');
 const to         = require('to-case');
 const generators = require('yeoman-generator');
 
+/**
+ * Our main generator
+ */
 const serverGenerator = generators.Base.extend({
   prompting: {
     welcome() {
@@ -20,34 +22,35 @@ const serverGenerator = generators.Base.extend({
         type    : 'input',
         message : 'What is the project name:',
         filter  : answer => to.slug(answer),
-        default : path.basename(this.destinationPath())
+        default : path.basename(this.destinationPath()),
       }, {
         name    : 'projectDescription',
         type    : 'input',
-        message : 'Enter the project description:'
+        message : 'Enter the project description:',
       }, {
         name    : 'projectVersion',
         type    : 'input',
         message : 'Version:',
-        default : '0.1.0'
+        default : '0.1.0',
       }, {
-        name    : 'authorName',
+        name: 'authorName',
         type    : 'input',
         message : 'Author name:',
-        store   : true
+        store   : true,
       }, {
-        name    : 'authorEmail',
-        type    : 'input',
-        message : 'Author email:',
-        store   : true
-      }]).then((answers) => {
+        name   : 'authorEmail',
+        type   : 'input',
+        message: 'Author email: ',
+        store  : true,
+      },
+      ]).then((answers) => {
         this.projectName        = answers.projectName;
         this.projectDescription = answers.projectDescription;
         this.projectVersion     = answers.projectVersion;
         this.authorName         = answers.authorName;
         this.authorEmail        = answers.authorEmail;
       });
-    }
+    },
   },
 
   writing: {
@@ -83,8 +86,8 @@ const serverGenerator = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('README.md'),
         this.destinationPath('README.md'), {
-          projectName       : this.projectName,
-          projectDescription: this.projectDescription
+          projectName: this.projectName,
+          projectDescription: this.projectDescription,
         }
       );
     },
@@ -92,7 +95,7 @@ const serverGenerator = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('jsdoc.conf.json'),
         this.destinationPath('jsdoc.conf.json'), {
-          projectName: this.projectName
+          projectName: this.projectName,
         }
       );
     },
@@ -100,11 +103,11 @@ const serverGenerator = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('package.json'),
         this.destinationPath('package.json'), {
-          projectName       : this.projectName,
+          projectName: this.projectName,
           projectDescription: this.projectDescription,
-          projectVersion    : this.projectVersion,
-          authorName        : this.authorName,
-          authorEmail       : this.authorEmail
+          projectVersion: this.projectVersion,
+          authorName: this.authorName,
+          authorEmail: this.authorEmail,
         }
       );
     },
@@ -112,7 +115,7 @@ const serverGenerator = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('serverless.yml'),
         this.destinationPath('serverless.yml'), {
-          projectName: this.projectName
+          projectName: this.projectName,
         }
       );
     },
@@ -126,7 +129,7 @@ const serverGenerator = generators.Base.extend({
       this.fs.copyTpl(
         this.templatePath('bin/ci.sh'),
         this.destinationPath('bin/ci.sh'), {
-          projectName: this.projectName
+          projectName: this.projectName,
         }
       );
       this.fs.copy(
@@ -152,12 +155,6 @@ const serverGenerator = generators.Base.extend({
         this.destinationPath('config/.env.prod')
       );
     },
-    test() {
-      this.fs.copy(
-        this.templatePath('test/api.js'),
-        this.destinationPath('test/api.js')
-      );
-    },
     src() {
       this.fs.copy(
         this.templatePath('src/libs/README.md'),
@@ -175,16 +172,17 @@ const serverGenerator = generators.Base.extend({
         this.templatePath('src/helpers/logger.js'),
         this.destinationPath('src/helpers/logger.js')
       );
-    }
+    },
   },
   install() {
     this.composeWith('serverless:route');
     this.npmInstall();
   },
   end() {
-    this.log(yosay('Your project has been set up! \n Thanks and see you soon!'));
-  }
+    this.log(
+      yosay('Your project has been set up! \n Thanks and see you soon!')
+      );
+  },
 });
-/* eslint-enable */
 
 module.exports = serverGenerator;

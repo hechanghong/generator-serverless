@@ -45,10 +45,15 @@ It creates the handler files
  and modify the `serverless.yml` file according to.
 
 ## Unit Testing
+### Generator unit tests
 TODO
 
-## Features
-### Features
+### Project unit tests
+For every route created with the generator, a corresponding unit test template file is added
+in the `test` directory.
+
+## Project features
+### These are all the features of the generated project:
 
 | Feature                                | Summary                                                                                                                                                                                                                                                     |
 |----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -35,13 +35,6 @@ provider:
     squad: Test
 
 functions:
-  api:
-    handler: src/handlers/api.run
-    events:
-      - http:
-          path: api
-          method: get
-          cors: true
 ### yeoman hook ###
 ## Don't touch this comment, the subgenerator needs it'
 
