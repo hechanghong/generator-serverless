@@ -1,47 +1,55 @@
 'use strict';
 
-const joi = require('joi');
-const winston = require('winston');
+const Joi = require('joi');
+const Winston = require('winston');
+const LoggedError = require('../helpers/loggederror');
+const HTTPStatus = require('http-status');
+const Settings = require('../../config/env.json');
 
-const envVarsSchema = joi.object({
-  LOGGER_LEVEL: joi.string()
-                     .allow([
-                       'error',
-                       'warn',
-                       'info',
-                       'verbose',
-                       'debug',
-                       'silly',
-                     ])
-                     .default('info'),
-  LOGGER_CONSOLE_ENABLED: joi .boolean()
-                              .truthy('TRUE')
-                              .truthy('true')
-                              .falsy('FALSE')
-                              .falsy('false')
-                              .default(true),
+const envVarsSchema = Joi.object({
+  logger: Joi.object({
+    level: Joi.string()
+      .allow([
+        'error',
+        'warn',
+        'info',
+        'verbose',
+        'debug',
+        'silly'
+      ])
+      .default('info'),
+    console_enabled: Joi.boolean()
+      .truthy('TRUE')
+      .truthy('true')
+      .falsy('FALSE')
+      .falsy('false')
+      .default(true)
+  })
 }).unknown()
   .required();
 
-const envVars = joi.validate(process.env, envVarsSchema);
+const envVars = Joi.validate(Settings, envVarsSchema);
 
-if (envVars.error)
-{
-  throw new Error(`Config validation error: ${envVars.error.message}`);
+if (envVars.error) {
+  throw new LoggedError(
+    'Logger config validation error',
+    envVars.error.message,
+    HTTPStatus.INTERNAL_SERVER_ERROR,
+    false
+  );
 }
 
 const transports = [];
 
-if (envVars.value.LOGGER_CONSOLE_ENABLED)
-{
-  transports.push(new (winston.transports.Console)({
+if (envVars.value.logger.console_enabled) {
+  transports.push(new (Winston.transports.Console)({
     json: true,
     colorize: true,
   }));
 }
 
-const logger = new winston.Logger({
-  level: envVars.value.LOGGER_LEVEL,
+const logger = new Winston.Logger({
+  level: envVars.value.logger.level,
   transports,
 });
 

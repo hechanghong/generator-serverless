@@ -15,14 +15,21 @@ class ExtendableError extends Error {
    * @param {boolean} isPublic - Whether the message
    *                             should be visible to user or not.
    */
-  constructor(title, message, status, isPublic)
-  {
+  constructor(title, message, status, isPublic) {
     super(message);
     this.name = this.constructor.name;
     this.title = title;
     this.message = message;
-    this.status = status;
-    this.isPublic = isPublic;
+    if (!status) {
+      this.status = httpStatus.INTERNAL_SERVER_ERROR;
+    } else {
+      this.status = status;
+    }
+    if (typeof isPublic !== 'boolean') {
+      this.isPublic = true;
+    } else {
+      this.isPublic = isPublic;
+    }
     // This is required since bluebird 4 doesn't append it anymore.
     this.isOperational = true;
     Error.captureStackTrace(this, this.constructor.name);
@@ -44,11 +51,7 @@ class LoggedError extends ExtendableError {
    * @param {boolean} isPublic - Whether the message
    *                             should be visible to user or not.
    */
-  constructor(title,
-              message,
-              status = httpStatus.INTERNAL_SERVER_ERROR,
-              isPublic = false)
-  {
+  constructor(title, message, status, isPublic) {
     logger.error(message, {title, status, });
     super(title, message, status, isPublic);
   }

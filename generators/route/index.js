@@ -3,6 +3,7 @@
 const to = require('to-case');
 const generators = require('yeoman-generator');
 const fileReader = require('html-wiring');
+const ucfirst = require('ucfirst');
 
 /**
  * Generates the different types of names for our routes
@@ -101,17 +102,30 @@ const serverGenerator = generators.Base.extend({
           this.log(`Route ${route.slugName} already exists`);
         } else {
           // All good
-          this.fs.copy(
-            this.templatePath('./../../app/templates/src/handlers/api.js'),
-            this.destinationPath(`src/handlers/${route.slugName}.js`)
+          this.fs.copyTpl(
+            this.templatePath('./../../app/templates/src/handlers/foo.js'),
+            this.destinationPath(`src/handlers/${route.slugName}.js`),
+            {
+              routeName: route.slugName,
+              classBaseName: ucfirst(route.slugName)
+            }
+          );
+          this.fs.copyTpl(
+            this.templatePath('./../../app/templates/src/libs/foo/foo.service.js'),
+            this.destinationPath(`src/libs/${route.slugName}/${route.slugName}.service.js`),
+            {
+              routeName: route.slugName,
+              classBaseName: ucfirst(route.slugName)
+            }
           );
           file = updateYamlFile(route, file);
         }
         // We add the unit test for the route
         this.fs.copyTpl(
-          this.templatePath('./../../app/templates/test/api.js'),
-          this.destinationPath(`test/${route.slugName}.js`), {
+          this.templatePath('./../../app/templates/test/foo/foo.test.js'),
+          this.destinationPath(`test/${route.slugName}/${route.slugName}.test.js`), {
             routeName: route.slugName,
+            classBaseName: ucfirst(route.slugName)
           }
         );
       });

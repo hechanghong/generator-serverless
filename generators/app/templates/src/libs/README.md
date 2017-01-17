@@ -1,21 +1,7 @@
 Here is the library directory.
-You can put your precess-flow libraries.
+You can put your process-flow libraries.
 
-Ex: 
-
-```javascript
-class User {
-    constructor() {
-        //...
-    }
-    
-    /**
-     * Return a user list
-     */
-    list() {
-        //...
-    }
-}
-
-module.exports = User;
-```
+Store your files inside folders and name them using the following convention:
+* foo.service.js --> Service class that define the service behaviours
+* foo.model.js --> Model class related to DB processes
+* foo.schema.js --> Schema class/object related to a validation schema

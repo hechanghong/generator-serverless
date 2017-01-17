@@ -3,15 +3,19 @@
 
 ## CLI
 
-### Create `.env` file
+### Create `env.json` file
 
 ```bash
-    $ cp config/.env.dev config/.env
+    $ cp config/env.dev.json config/env.json
     # or
-    $ cp config/.env.prod config/.env
+    $ cp config/env.prod.json config/env.json
 ```
 
+Then edit `config/env.json`.
+
 ### Running locally
+
+Uncomment the plugin section in `serverless.yml` then:
 
 ```bash
     $ sls offline
@@ -50,8 +54,23 @@ More information on [serverless-mocha-plugin](https://github.com/SC5/serverless-
 ```bash
     $ npm run -s ci
 ```
+
+### Run Eslint
+
+```bash
+    $ npm run -s lint
+```
+
 ### Run dependencies security check
 
 ```bash
     $ npm run -s security
+```
+
+## Miscellaneous
+
+### Run Unit Test With Nyan Cat
+
+```bash
+  $ npm run -s test-nyan
 ```

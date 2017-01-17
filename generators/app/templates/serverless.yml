@@ -42,4 +42,3 @@ functions:
 ## Re-comment it before deploy !!
 #plugins:
 #  - serverless-offline
-#  - serverless-mocha-plugin

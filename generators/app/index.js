@@ -147,12 +147,16 @@ const serverGenerator = generators.Base.extend({
     },
     config() {
       this.fs.copy(
-        this.templatePath('config/env.dev'),
-        this.destinationPath('config/.env.dev')
+        this.templatePath('config/env.dev.json'),
+        this.destinationPath('config/env.dev.json')
       );
       this.fs.copy(
-        this.templatePath('config/env.prod'),
-        this.destinationPath('config/.env.prod')
+        this.templatePath('config/env.prod.json'),
+        this.destinationPath('config/env.prod.json')
+      );
+      this.fs.copy(
+        this.templatePath('config/env.dev.json'),
+        this.destinationPath('config/env.json')
       );
     },
     src() {
@@ -161,16 +165,16 @@ const serverGenerator = generators.Base.extend({
         this.destinationPath('src/libs/README.md')
       );
       this.fs.copy(
-        this.templatePath('src/models/README.md'),
-        this.destinationPath('src/models/README.md')
-      );
-      this.fs.copy(
-        this.templatePath('src/helpers/loggedError.js'),
-        this.destinationPath('src/helpers/loggedError.js')
+        this.templatePath('src/helpers/loggederror.js'),
+        this.destinationPath('src/helpers/loggederror.js')
       );
       this.fs.copy(
         this.templatePath('src/helpers/logger.js'),
         this.destinationPath('src/helpers/logger.js')
+      );
+      this.fs.copy(
+        this.templatePath('src/helpers/lambdawrapper.js'),
+        this.destinationPath('src/helpers/lambdawrapper.js')
       );
     },
   },
