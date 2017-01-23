@@ -2,6 +2,7 @@
 
 const Promise = require('bluebird');
 const HTTPStatus = require('http-status');
+const LoggedError = require('./loggederror');
 
 /**
  * Simple Lambda Wrapper
@@ -89,11 +90,11 @@ class LambdaWrapper {
    * @return {Promise} Return the Promise itself
    */
   static promisify(func, data) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       try {
-        resolve(func(data));
+        resolve(func(data, resolve));
       } catch (error) {
-        reject(error);
+        throw LoggedError.createFromError(error);
       }
     });
   }
