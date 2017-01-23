@@ -17,7 +17,7 @@ module.exports.run = (event, context, callback) => {
   const service = new <%= classBaseName %>Service(true);
 
   // Each run is a chained promise
-  app.run(() => service.setBar(Settings.<%= routeName %>.bar_value))
+  app.run(() => service.setBar(Settings.logger.console_enabled))
      .run(() => service.getBar())
      .end();
 };
