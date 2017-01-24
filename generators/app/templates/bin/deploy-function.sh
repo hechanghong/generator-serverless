@@ -2,6 +2,7 @@
 
 ###
 # Deploy the function passed in the first argument (for development)
+# Usage: ./deploy-function.sh function_name [stage_name]
 ##
 
 source $(dirname $0)/function-lib.sh
