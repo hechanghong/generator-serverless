@@ -16,7 +16,7 @@ callFunction "Remove devDependencies" "npm prune --production"
 # Install production dependencies
 callFunction "Install production dependencies" "npm install --production"
 # Deploy Serverless project
-callFunction "Deploy Serverless project" "sls deploy function --function ${1}  --verbose --region ${DEFAULT_AWS_REGION} --stage dev"
+callFunction "Deploy Serverless project" "sls deploy function --function ${1} --verbose --region ${DEFAULT_AWS_REGION} --stage ${2:-$DEFAULT_STAGE}"
 
 # EXIT
 exit ${RETURN_CODE}
