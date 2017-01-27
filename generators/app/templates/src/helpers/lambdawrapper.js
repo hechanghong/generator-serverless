@@ -76,7 +76,12 @@ class LambdaWrapper {
       } else {
         this.body.error = 'Internal server error';
       }
-    }).finally(() => {
+    }).then((data) => {
+      // Handle Promise returned data into the final body
+      if (data) {
+        // Feel free to add custom data modifier here or as the last .run()
+        this.body = data;
+      }
       this.finalCallback(null, this.getResponse());
     });
   }
