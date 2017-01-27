@@ -73,3 +73,20 @@ in the `test` directory.
 | Use [Node Security Platform](https://nodesecurity.io/opensource) - NSP    | nsp is the main command line interface to the Node Security Platform. It allows for auditing a package.json or npm-shrinkwrap.json file against the API. |
 | Use [Serverless Mocha Plugin](https://github.com/SC5/serverless-mocha-plugin) Enable it manually | A Serverless Plugin for the Serverless Framework which adds support for test driven development using mocha |
 | Use [Serverless Offline Plugin](https://github.com/dherault/serverless-offline) Enable it manually   | Emulate AWS λ and API Gateway locally when developing your Serverless project |
+
+## Changelog
+
+### V1.3.0
+
+* Added Settings variable into the default handler
+* Added Settings usage in default handler template
+* Modified parameter to a static one
+* Improve LambdaWrapper Error catching
+* Added verbose mode on full deployment
+* Created function-specific deployment script
+* Made stage environment changeable
+* Added usage documentation
+* Gitignores env.json instead of .env
+* Allow run() to handle data to be displayed via end()
+* Updated documentation for optional LoggedError arguments
+* Update package version
