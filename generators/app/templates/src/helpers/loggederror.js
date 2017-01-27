@@ -39,9 +39,9 @@ class ExtendableError extends Error {
    * Create a new instance of this using passed Error Exception
    *
    * @param {Error} error Native JS Error
-   * @param {string} title - Error title.
-   * @param {number} status - HTTP status code of error.
-   * @param {boolean} isPublic - Whether the message
+   * @param {string?} title - Error title.
+   * @param {number?} status - HTTP status code of error.
+   * @param {boolean?} isPublic - Whether the message
    *                             should be visible to user or not.
    * @returns {*} A new instance of this (can be ExtendableError or any extended class)
    */
