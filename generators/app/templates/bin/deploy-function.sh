@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 ###
-# Deploy script using the staging passed in first argument
+# Deploy the function passed in the first argument (for development)
+# Usage: ./deploy-function.sh function_name [stage_name]
 ##
 
 source $(dirname $0)/function-lib.sh
@@ -16,7 +17,7 @@ callFunction "Remove devDependencies" "npm prune --production"
 # Install production dependencies
 callFunction "Install production dependencies" "npm install --production"
 # Deploy Serverless project
-callFunction "Deploy Serverless project" "sls deploy --verbose --region ${DEFAULT_AWS_REGION} --stage ${1:-$DEFAULT_STAGE}"
+callFunction "Deploy Serverless project" "sls deploy function --function ${1} --verbose --region ${DEFAULT_AWS_REGION} --stage ${2:-$DEFAULT_STAGE}"
 
 # EXIT
 exit ${RETURN_CODE}

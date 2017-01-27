@@ -4,6 +4,7 @@ const debug = require('debug')('API');
 const logger = require('../helpers/logger');
 const LambdaWrapper = require('../helpers/lambdawrapper');
 const <%= classBaseName %>Service = require('../libs/<%= routeName %>/<%= routeName %>.service');
+const Settings = require('../../config/env.json');
 
 // Debug app example
 debug('Starting API');
@@ -16,7 +17,7 @@ module.exports.run = (event, context, callback) => {
   const service = new <%= classBaseName %>Service(true);
 
   // Each run is a chained promise
-  app.run(() => service.setBar(false))
+  app.run(() => service.setBar(Settings.logger.console_enabled))
      .run(() => service.getBar())
      .end();
 };

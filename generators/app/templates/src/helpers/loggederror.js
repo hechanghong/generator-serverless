@@ -1,6 +1,6 @@
 'use strict';
 
-const httpStatus = require('http-status');
+const HTTPStatus = require('http-status');
 const logger = require('./logger');
 
 /**
@@ -21,7 +21,7 @@ class ExtendableError extends Error {
     this.title = title;
     this.message = message;
     if (!status) {
-      this.status = httpStatus.INTERNAL_SERVER_ERROR;
+      this.status = HTTPStatus.INTERNAL_SERVER_ERROR;
     } else {
       this.status = status;
     }
@@ -33,6 +33,29 @@ class ExtendableError extends Error {
     // This is required since bluebird 4 doesn't append it anymore.
     this.isOperational = true;
     Error.captureStackTrace(this, this.constructor.name);
+  }
+
+  /**
+   * Create a new instance of this using passed Error Exception
+   *
+   * @param {Error} error Native JS Error
+   * @param {string?} title - Error title.
+   * @param {number?} status - HTTP status code of error.
+   * @param {boolean?} isPublic - Whether the message
+   *                             should be visible to user or not.
+   * @returns {*} A new instance of this (can be ExtendableError or any extended class)
+   */
+  static createFromError(error, title, status, isPublic) {
+    if (!(error instanceof this)) {
+      return new this(
+        title ? title : 'Internal server error',
+        error.message,
+        status ? status : HTTPStatus.INTERNAL_SERVER_ERROR,
+        isPublic ? isPublic : false
+      );
+    } else {
+      return error;
+    }
   }
 }
 
