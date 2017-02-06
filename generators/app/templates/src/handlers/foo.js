@@ -3,7 +3,7 @@
 const debug = require('debug')('API');
 const logger = require('../helpers/logger');
 const LambdaWrapper = require('../helpers/lambdawrapper');
-const <%= classBaseName %>Service = require('../libs/<%= routeName %>/<%= routeName %>.service');
+const <%= classBaseName %>Service = require('../libs/<%= fileName %>/<%= fileName %>.service');
 const Settings = require('../../config/env.json');
 
 // Debug app example
