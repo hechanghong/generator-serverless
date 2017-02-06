@@ -106,16 +106,16 @@ const serverGenerator = generators.Base.extend({
             this.templatePath('./../../app/templates/src/handlers/foo.js'),
             this.destinationPath(`src/handlers/${route.slugName}.js`),
             {
-              routeName: route.slugName,
-              classBaseName: ucfirst(route.slugName)
+              fileName: route.slugName,
+              classBaseName: ucfirst(route.camelName)
             }
           );
           this.fs.copyTpl(
             this.templatePath('./../../app/templates/src/libs/foo/foo.service.js'),
             this.destinationPath(`src/libs/${route.slugName}/${route.slugName}.service.js`),
             {
-              routeName: route.slugName,
-              classBaseName: ucfirst(route.slugName)
+              fileName: route.slugName,
+              classBaseName: ucfirst(route.camelName)
             }
           );
           file = updateYamlFile(route, file);
@@ -124,8 +124,8 @@ const serverGenerator = generators.Base.extend({
         this.fs.copyTpl(
           this.templatePath('./../../app/templates/test/foo/foo.test.js'),
           this.destinationPath(`test/${route.slugName}/${route.slugName}.test.js`), {
-            routeName: route.slugName,
-            classBaseName: ucfirst(route.slugName)
+            fileName: route.slugName,
+            classBaseName: ucfirst(route.camelName)
           }
         );
       });
