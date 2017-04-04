@@ -2,7 +2,7 @@
 
 const Promise = require('bluebird');
 const HTTPStatus = require('http-status');
-const LoggedError = require('./loggederror');
+const LoggedError = require('@exaprint/error').LoggedError;
 
 /**
  * Simple Lambda Wrapper
@@ -66,7 +66,7 @@ class LambdaWrapper {
    * @return {null} Void
    */
   end() {
-    this.p.catch((error) => {
+    this.p.catch(error => {
       this.error = true;
       this.statusCode = error.status;
       this.body.success = false;
@@ -76,7 +76,7 @@ class LambdaWrapper {
       } else {
         this.body.error = 'Internal server error';
       }
-    }).then((data) => {
+    }).then(data => {
       // Handle Promise returned data into the final body
       if (data) {
         // Feel free to add custom data modifier here or as the last .run()
@@ -95,7 +95,7 @@ class LambdaWrapper {
    * @return {Promise} Return the Promise itself
    */
   static promisify(func, data) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       try {
         resolve(func(data, resolve));
       } catch (error) {
