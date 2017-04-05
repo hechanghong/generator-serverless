@@ -3,28 +3,22 @@
 
 ## CLI
 
-### Create `env.json` file
-
-```bash
-    $ cp config/env.dev.json config/env.json
-    # or
-    $ cp config/env.prod.json config/env.json
-```
-
-Then edit `config/env.json`.
-
 ### Running locally
 
 Uncomment the plugin section in `serverless.yml` then:
 
 ```bash
-    $ sls offline
+    $ npm run -s local
+    # Or
+    $ yarn local
 ```
 
 ### Deploy project remotely
 
 ```bash
-    $ bash bin/deploy.sh
+    $ npm run -s deploy
+    # Or
+    $ yarn deploy
 ```
 
 ### Deploy a function remotely
@@ -33,44 +27,36 @@ Uncomment the plugin section in `serverless.yml` then:
     $ sls deploy function -f api --region eu-west-1 
 ```
 
-## Continuous Integration
-
-### Creating tests
+### UnDeploy
 
 ```bash
-    $ sls create test -f functionName
+    $ npm run -s undeploy
+    # Or 
+    $ yarn undeploy
 ```
 
-More information on [serverless-mocha-plugin](https://github.com/SC5/serverless-mocha-plugin)
+## Continuous Integration
 
 ### Test with mocha
 
 ```bash
     $ npm test
+    # Or
+    $ yarn test
 ```
 
-### Run full CI Stack
+### Build JsDoc and Plato
 
 ```bash
-    $ npm run -s ci
+    $ npm run -s build
+    # Or 
+    $ yarn build
 ```
 
-### Run Eslint
+### Run Eslint & security check
 
 ```bash
     $ npm run -s lint
-```
-
-### Run dependencies security check
-
-```bash
-    $ npm run -s security
-```
-
-## Miscellaneous
-
-### Run Unit Test With Nyan Cat
-
-```bash
-  $ npm run -s test-nyan
+    # Or 
+    $ yarn lint
 ```
