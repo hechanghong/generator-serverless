@@ -50,4 +50,4 @@ node_modules
 /.serverless/
 
 # Env
-.env
+config.json

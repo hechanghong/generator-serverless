@@ -24,6 +24,11 @@ const serverGenerator = generators.Base.extend({
         filter  : answer => to.slug(answer),
         default : path.basename(this.destinationPath()),
       }, {
+        name    : 'projectOwner',
+        type    : 'input',
+        message : 'What is the git project owner (owner/repository):',
+        filter  : answer => to.slug(answer)
+      }, {
         name    : 'projectDescription',
         type    : 'input',
         message : 'Enter the project description:',
@@ -45,6 +50,7 @@ const serverGenerator = generators.Base.extend({
       },
       ]).then((answers) => {
         this.projectName        = answers.projectName;
+        this.projectOwner        = answers.projectOwner;
         this.projectDescription = answers.projectDescription;
         this.projectVersion     = answers.projectVersion;
         this.authorName         = answers.authorName;
@@ -125,52 +131,31 @@ const serverGenerator = generators.Base.extend({
         this.destinationPath('yarn.lock')
       );
     },
-    bin() {
+    dotbox() {
       this.fs.copyTpl(
-        this.templatePath('bin/ci.sh'),
-        this.destinationPath('bin/ci.sh'), {
+        this.templatePath('dotbox.json'),
+        this.destinationPath('.dotbox.json'), {
           projectName: this.projectName,
+          projectOwner: this.projectOwner,
         }
       );
+    },
+    gitlabCi() {
       this.fs.copy(
-        this.templatePath('bin/deploy.sh'),
-        this.destinationPath('bin/deploy.sh')
-      );
-      this.fs.copy(
-        this.templatePath('bin/function-lib.sh'),
-        this.destinationPath('bin/function-lib.sh')
-      );
-      this.fs.copy(
-        this.templatePath('bin/remove.sh'),
-        this.destinationPath('bin/remove.sh')
+        this.templatePath('gitlab-ci.yml'),
+        this.destinationPath('.gitlab-ci.yml')
       );
     },
     config() {
       this.fs.copy(
-        this.templatePath('config/env.dev.json'),
-        this.destinationPath('config/env.dev.json')
-      );
-      this.fs.copy(
-        this.templatePath('config/env.prod.json'),
-        this.destinationPath('config/env.prod.json')
-      );
-      this.fs.copy(
-        this.templatePath('config/env.dev.json'),
-        this.destinationPath('config/env.json')
+        this.templatePath('config.json'),
+        this.destinationPath('config.json')
       );
     },
     src() {
       this.fs.copy(
         this.templatePath('src/libs/README.md'),
         this.destinationPath('src/libs/README.md')
-      );
-      this.fs.copy(
-        this.templatePath('src/helpers/loggederror.js'),
-        this.destinationPath('src/helpers/loggederror.js')
-      );
-      this.fs.copy(
-        this.templatePath('src/helpers/logger.js'),
-        this.destinationPath('src/helpers/logger.js')
       );
       this.fs.copy(
         this.templatePath('src/helpers/lambdawrapper.js'),

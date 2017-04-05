@@ -1,0 +1,101 @@
+image: node:6.10
+
+cache:
+  paths:
+    - node_modules/
+
+stages:
+  - test
+  - build
+  - deploy
+
+############ CI ############
+test:nodejs-6.10:
+  image: node:6.10
+  stage: test
+  script:
+    - yarn
+    - yarn remote-test
+  tags:
+    - docker
+  artifacts:
+    name: coverage
+    paths:
+      - coverage/
+
+lint:
+  stage: test
+  script:
+    - yarn
+    - yarn lint
+  tags:
+    - docker
+  except:
+    - develop
+    - master
+
+doc_and_analysis:
+  stage: build
+  script:
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+      - artifacts/jsdoc/
+      - artifacts/plato/
+  tags:
+    - docker
+  only:
+    - master
+##################################
+
+############ Deploy ############
+
+## Deploy artifacts to Gitlab Pages
+pages:
+  stage: deploy
+  dependencies:
+    - test:nodejs-6.10
+    - doc_and_analysis
+  script:
+    - npm i -g indexifier
+    - mkdir public/ public/jsdoc/ public/plato/ public/coverage/
+    - mv coverage/ public/
+    - mv artifacts/jsdoc/ public/
+    - mv artifacts/plato/ public/
+    - indexifier ./public --html > public/index.html
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
+  tags:
+    - docker
+  only:
+    - master
+
+## Deploy on tag creation
+
+Deploy Stage:
+  stage: deploy
+  script:
+    - npm i -g serverless
+    - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+    - yarn
+    - PROJECT_ENV=stage yarn remote-deploy
+  tags:
+    - docker
+  only:
+    - develop
+
+Deploy Tag:
+  stage: deploy
+  script:
+    - npm i -g serverless
+    - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
+    - yarn
+    - PROJECT_ENV=production yarn remote-deploy
+  tags:
+    - docker
+  only:
+    - tags
+######################################

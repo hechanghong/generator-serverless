@@ -1,13 +1,10 @@
 'use strict';
 
-const debug = require('debug')('API');
-const logger = require('../helpers/logger');
+const Settings = require('../../config.json');
+const logger = require('@exaprint/logger').setup(Settings);
 const LambdaWrapper = require('../helpers/lambdawrapper');
 const <%= classBaseName %>Service = require('../libs/<%= fileName %>/<%= fileName %>.service');
-const Settings = require('../../config/env.json');
 
-// Debug app example
-debug('Starting API');
 
 module.exports.run = (event, context, callback) => {
   // Logging example

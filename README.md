@@ -1,5 +1,10 @@
 # Generator Serverless
+
+[![NPM Badge](https://img.shields.io/npm/v/generator-serverless.svg)](https://www.npmjs.com/package/generator-serverless)
+
 Yeoman generator for a lambda Serverless project
+
+![Logo](https://gitlab.com/exaprint/generator-serverless/raw/master/yo_serverless.png)
 
 ## Requirements
 
