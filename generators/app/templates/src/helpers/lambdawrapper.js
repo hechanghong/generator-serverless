@@ -1,6 +1,5 @@
 'use strict';
 
-const Promise = require('bluebird');
 const HTTPStatus = require('http-status');
 const LoggedError = require('@exaprint/error').LoggedError;
 
