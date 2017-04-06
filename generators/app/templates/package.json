@@ -21,7 +21,8 @@
   ],
   "author": "<%= authorName %> <<%= authorEmail %>>",
   "dependencies": {
-    "bluebird": "^3.4.7",
+    "@exaprint/error": "1.1.0",
+    "@exaprint/logger": "1.1.1",
     "http-status": "^0.2.3",
     "joi": "10.0.5"
   },
