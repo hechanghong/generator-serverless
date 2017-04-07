@@ -14,7 +14,7 @@ test:nodejs-6.10:
   image: node:6.10
   stage: test
   script:
-    - yarn
+    - npm i
     - yarn remote-test
   tags:
     - docker
@@ -26,7 +26,7 @@ test:nodejs-6.10:
 lint:
   stage: test
   script:
-    - yarn
+    - npm i
     - yarn lint
   tags:
     - docker
@@ -37,7 +37,7 @@ lint:
 doc_and_analysis:
   stage: build
   script:
-    - yarn
+    - npm i
     - yarn build
   artifacts:
     paths:
@@ -80,7 +80,7 @@ Deploy Stage:
   script:
     - npm i -g serverless
     - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-    - yarn
+    - npm i
     - PROJECT_ENV=stage yarn remote-deploy
   tags:
     - docker
@@ -92,7 +92,7 @@ Deploy Tag:
   script:
     - npm i -g serverless
     - serverless config credentials --provider aws --key $AWS_ACCESS_KEY_ID --secret $AWS_SECRET_ACCESS_KEY
-    - yarn
+    - npm i
     - PROJECT_ENV=production yarn remote-deploy
   tags:
     - docker

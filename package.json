@@ -1,6 +1,6 @@
 {
   "name": "generator-serverless",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Yeoman generator for creating serverless projects",
   "main": "index.js",
   "scripts": {
