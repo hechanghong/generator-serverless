@@ -1,7 +1,11 @@
 'use strict';
 
-const expect = require('chai').expect;
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+const expect = chai.expect;
 const <%= classBaseName %>Service = require('../../src/libs/<%= fileName %>/<%= fileName %>.service');
+
+chai.use(chaiAsPromised);
 
 describe('Test', function() {
   it('Should be completely tested', function() {
