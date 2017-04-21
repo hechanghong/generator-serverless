@@ -29,6 +29,8 @@
     "yosay": "^1.2.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.11.1",
     "eslint-config-exaprint": "latest",
     "mocha": "^3.0.2",
